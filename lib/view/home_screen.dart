@@ -22,7 +22,7 @@ class HomeScreen extends StatelessWidget {
             ],
           ),
         ),
-        body: const TabBarView(
+        body: TabBarView(
           children: [
             ProductsScreen(),
             LocalScreen(),
