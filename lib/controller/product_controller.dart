@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'package:battery_plus/battery_plus.dart';
 import 'package:get/get.dart';
 import 'package:gritstone_task/model/category_model.dart';
 import 'package:gritstone_task/model/product_model.dart';
@@ -7,8 +6,19 @@ import 'package:http/http.dart' as http;
 
 class ProductController extends GetxController {
   RxBool isLoading = false.obs;
-  late ProductModel productModel = getProduct();
-  late CategoryModel categoryModel = getCategory();
+  ProductModel? productModel;
+  CategoryModel? categoryModel;
+
+  @override
+  Future<void> onInit() async {
+    super.onInit();
+    getProduct();
+  }
+
+  @override
+  Future<void> onReady() async {
+    super.onReady();
+  }
 
   getProduct() async {
     try {
@@ -48,10 +58,15 @@ class ProductController extends GetxController {
     }
   }
 
-  // Battery level
-  void getBatteryLevel() async {
-    final Battery battery = Battery();
-    int batteryLevel = await battery.batteryLevel;
+  List getProductList() {
+    return productModel!.products;
   }
+
+  List getCategorList() {
+    return categoryModel!.products;
+  }
+
+  // Battery level
+
   // Location tracking background
 }
